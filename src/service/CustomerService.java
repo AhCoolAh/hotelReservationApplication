@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class CustomerService {
     //Collection<Customer> customers = new ArrayList<>();
-    Map<String, Customer> mapOfCustomers = new HashMap<String, Customer>();
+    static Map<String, Customer> mapOfCustomers = new HashMap<String, Customer>();
     private static CustomerService instance;
     //private final Map<String, Customer> mapOfCustomers;
 

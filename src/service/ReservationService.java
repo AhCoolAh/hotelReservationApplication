@@ -76,4 +76,8 @@ public class ReservationService {
         }
     }
 
+    public Set<IRoom> getSetOfRooms() {
+        return setOfRooms;
+    }
+
 }
