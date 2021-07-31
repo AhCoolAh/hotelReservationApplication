@@ -20,9 +20,7 @@ public class MainMenu {
         return instance;
     }
 
-    public static void main(String[] args) {
-        MainMenu.getInstance().mainMenuUi();
-    }
+    public static void main(String[] args) {}
 
     public void mainMenuUi() {
 
