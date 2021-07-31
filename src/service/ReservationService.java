@@ -3,6 +3,7 @@ package service;
 import model.Customer;
 import model.IRoom;
 import model.Reservation;
+import model.Room;
 
 import java.util.*;
 
@@ -27,8 +28,8 @@ public class ReservationService {
 
     public IRoom getARoom(String roomId) {
         for (IRoom room : setOfRooms) {
-            if (room.getRoomNumber() == roomId) {
-                return room;
+            if (room.getRoomNumber().equals(roomId)) {
+                 return room;
             }
         }
         return null;
@@ -71,9 +72,10 @@ public class ReservationService {
     }
 
     public void printAllReservation() {
-        for (Reservation reservation : setOfReservations) {
+        /*for (Reservation reservation : setOfReservations) {
             System.out.println(reservation);
-        }
+        }*/
+        System.out.println(setOfReservations);
     }
 
     public Set<IRoom> getSetOfRooms() {

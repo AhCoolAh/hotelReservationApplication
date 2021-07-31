@@ -11,7 +11,7 @@ public class Customer {
         String emailRegex = "^(.+)@(.+)[.](.+)$";
         Pattern pattern = Pattern.compile(emailRegex);
         if (!pattern.matcher(email).matches()) {
-            throw new IllegalArgumentException("Invalid Email");
+            throw new IllegalArgumentException("Invalid Email format, please try again");
         }
         this.firstName = firstName;
         this.lastName = lastName;

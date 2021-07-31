@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import model.IRoom;
 
 public class Reservation {
     private Customer customer;
