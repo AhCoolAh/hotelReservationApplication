@@ -1,10 +1,12 @@
 package model;
 
+import java.util.Objects;
+
 public class Room implements IRoom {
-    protected String roomNumber;
+    protected final String roomNumber;
     protected Double price;
-    protected RoomType roomType;
-    protected boolean isFree;
+    protected final RoomType roomType;
+    protected final boolean isFree;
 
     public Room(String roomNumber, Double price, RoomType roomType, boolean isFree) {
         this.roomNumber = roomNumber;
@@ -33,6 +35,25 @@ public class Room implements IRoom {
         return isFree;
     }
 
+    // Idea for overriding: https://mkyong.com/java/java-how-to-overrides-equals-and-hashcode/
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Room)) {
+            return false;
+        }
+        Room room = (Room) o;
+        return Objects.equals(roomNumber, room.roomNumber) &&
+                Objects.equals(price, room.price) &&
+                Objects.equals(roomType, room.roomType) &&
+                Objects.equals(isFree, room.isFree);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roomNumber, price, roomType, isFree);
+    }
 
     @Override
     public String toString() {

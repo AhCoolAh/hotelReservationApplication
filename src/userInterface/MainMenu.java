@@ -66,7 +66,7 @@ public class MainMenu {
         String roomNumber;
         String selection;
         boolean continueLoop = true;
-        SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         while(continueLoop) {
             try {
                 /*System.out.println("Would you like to book a new room? (Y/N?)");

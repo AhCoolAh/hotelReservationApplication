@@ -13,7 +13,7 @@ public class ReservationService {
     Set<Reservation> setOfReservations = new HashSet<Reservation>();
     private static ReservationService instance;
 
-    private ReservationService() {}
+    ReservationService() {}
 
     public static ReservationService getInstance() {
         if (instance == null) {
@@ -43,7 +43,7 @@ public class ReservationService {
 
     public Collection<IRoom> findRooms(Date checkInDate, Date checkOutDate) {
         List<IRoom> foundRooms = new ArrayList<IRoom>();
-        for (IRoom room : setOfRooms) {
+        /*for (IRoom room : setOfRooms) {
             if (!setOfReservations.contains(room)) {
                 foundRooms.add(room);
             } else {
@@ -56,6 +56,17 @@ public class ReservationService {
                 if (isBookable) {
                     foundRooms.add(room);
                 }
+            }
+        }*/
+        boolean isBookable = true;
+        for (IRoom room : setOfRooms) {
+            for (Reservation reservation : setOfReservations) {
+                if (room.equals(reservation.getRoom()) && (checkInDate.before(reservation.getCheckOutDate()) || checkOutDate.after(reservation.getCheckInDate()))) {
+                    isBookable = false;
+                }
+            }
+            if (isBookable) {
+                foundRooms.add(room);
             }
         }
         return foundRooms;
@@ -72,9 +83,6 @@ public class ReservationService {
     }
 
     public void printAllReservation() {
-        /*for (Reservation reservation : setOfReservations) {
-            System.out.println(reservation);
-        }*/
         System.out.println(setOfReservations);
     }
 
