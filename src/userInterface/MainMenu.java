@@ -3,6 +3,7 @@ package userInterface;
 import api.HotelResource;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -67,6 +68,9 @@ public class MainMenu {
         String selection;
         boolean continueLoop = true;
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        //idea for a calendar use and days adding:
+        //https://beginnersbook.com/2017/10/java-add-days-to-date/
+        Calendar calendar = Calendar.getInstance();
         while(continueLoop) {
             try {
                 /*System.out.println("Would you like to book a new room? (Y/N?)");
@@ -77,11 +81,34 @@ public class MainMenu {
                 System.out.println("Please, enter check-out date (dd/mm/yyyy):");
                 checkOutInput = scanner.nextLine();
                 checkOutDate = format.parse(checkOutInput);
+
+                /*System.out.println(checkInDate);
+                System.out.println(checkOutDate);
+                System.out.println("Mayachok");*/
+
                 if (HotelResource.getInstance().findARoom(checkInDate, checkOutDate).isEmpty()) {
-                    continueLoop = false;
-                    throw new Exception("-------------------------------------------\n" +
+                    System.out.println("-------------------------------------------\n" +
                             "There are no rooms available for these dates.\n" +
+                            "Please, let us check a list of suggested rooms\n" +
                             "-------------------------------------------");
+                    calendar.setTime(checkInDate);
+                    calendar.add(Calendar.DAY_OF_MONTH, 7);
+                    checkInInput = format.format(calendar.getTime());
+                    checkInDate = format.parse(checkInInput);
+                    calendar.setTime(checkOutDate);
+                    calendar.add(Calendar.DAY_OF_MONTH, 7);
+                    checkOutInput = format.format(calendar.getTime());
+                    checkOutDate = format.parse(checkOutInput);
+
+                    if (HotelResource.getInstance().findARoom(checkInDate, checkOutDate).isEmpty()) {
+                        continueLoop = false;
+                        throw new Exception("-----------------------------------------------------------------------------------\n" +
+                                "We are so sorry, but there are no rooms available for input dates or within a week.\n" +
+                                "-----------------------------------------------------------------------------------");
+
+                    }
+
+                    System.out.println("Suggested dates: " + checkInDate + checkOutDate);
                 }
 
                 System.out.println("List of all available rooms:\n" + HotelResource.getInstance().findARoom(checkInDate, checkOutDate));

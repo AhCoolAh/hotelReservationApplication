@@ -58,10 +58,11 @@ public class ReservationService {
                 }
             }
         }*/
-        boolean isBookable = true;
+
         for (IRoom room : setOfRooms) {
+            boolean isBookable = true;
             for (Reservation reservation : setOfReservations) {
-                if (room.equals(reservation.getRoom()) && (checkInDate.before(reservation.getCheckOutDate()) || checkOutDate.after(reservation.getCheckInDate()))) {
+                if (room.equals(reservation.getRoom()) && (!(checkInDate.before(reservation.getCheckInDate()) && checkOutDate.before(reservation.getCheckInDate())) && !(checkInDate.after(reservation.getCheckOutDate()) && checkOutDate.after(reservation.getCheckOutDate())))) {
                     isBookable = false;
                 }
             }
@@ -82,8 +83,12 @@ public class ReservationService {
         return customersReservations;
     }
 
+    Set<Reservation> getSetOfReservations() {
+        return setOfReservations;
+    }
+
     public void printAllReservation() {
-        System.out.println(setOfReservations);
+        System.out.println(instance.getSetOfReservations());
     }
 
     public Set<IRoom> getSetOfRooms() {
